@@ -13,7 +13,10 @@ class User extends Authenticatable
      * The attributes that are mass assignable.
      *
      * @var array
+     *
      */
+    protected $table='users';
+
     protected $fillable = [
         'name', 'email', 'password',
     ];
@@ -26,4 +29,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    //不可以注入的字段
+    protected $guarded=[];
+
+    public function statuses(){
+      return $this->hasmany(Status::class);
+    }
 }
